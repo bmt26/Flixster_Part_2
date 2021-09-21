@@ -87,9 +87,9 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemViewType(int position) {
         //voteAverage
-        if (movies.get(position).getVoteAverage()<5) {
+        if (movies.get(position).getVoteAverage()<8) {
             return NOTPOP;
-        } else if (5<=movies.get(position).getVoteAverage()) {
+        } else if (8<=movies.get(position).getVoteAverage()) {
             return POP;
         }
         return -1;
