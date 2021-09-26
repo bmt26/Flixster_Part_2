@@ -59,7 +59,7 @@ public class DetailActivity extends YouTubeBaseActivity {
                     }
                     String youtubeKey = results.getJSONObject(0).getString("key");
                     Log.d("DetailActivity", youtubeKey);
-                    initializeYoutube(youtubeKey);
+                    initializeYoutube(youtubeKey, 8<=movie.getRating());
                 } catch (JSONException e) {
                     Log.e("DetailActivity", "Failed to parse JSON");
                 }
@@ -72,12 +72,16 @@ public class DetailActivity extends YouTubeBaseActivity {
         });
     }
 
-    private void initializeYoutube(String youtubeKey) {
+    private void initializeYoutube(String youtubeKey, boolean pop) {
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("DetailActivity", "onInitializationSuccess");
                 youTubePlayer.cueVideo(youtubeKey);
+                if (pop) {
+                    youTubePlayer.play();
+                    youTubePlayer.setFullscreen(true);
+                }
             }
 
             @Override
