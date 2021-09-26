@@ -16,6 +16,8 @@ import java.util.List;
 import okhttp3.Headers;
 @Parcel
 public class Movie {
+
+    int movieId;
     String backdropPath;
     String posterPath;
     String title;
@@ -31,6 +33,7 @@ public class Movie {
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         rating = jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getInt("id");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -59,7 +62,7 @@ public class Movie {
         return overview;
     }
 
-    public double getRating() {
-        return rating;
-    }
+    public double getRating() { return rating; }
+
+    public int getMovieId() { return movieId; }
 }
