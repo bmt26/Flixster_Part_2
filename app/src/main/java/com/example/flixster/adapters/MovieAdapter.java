@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,6 +99,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
 
+        RelativeLayout container;
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
@@ -106,6 +109,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.container);
         }
 
         public void bind(Movie movie) {
@@ -121,17 +125,28 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 // else imageUrl = poster image
                 imageUrl = movie.getPosterPath();
             }
-
             Glide.with(context).load(imageUrl).into(ivPoster);
+
+            // 1. Register click listener on the whole orw
+            // 2. Navigate to a new activity on tap
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {
+
+        RelativeLayout container;
         ImageView ivPoster;
 
         public ViewHolder2(@NonNull View itemView) {
             super(itemView);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.container);
         }
 
         public void bind(Movie movie) {
@@ -139,6 +154,16 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             imageUrl = movie.getBackdropPath();
 
             Glide.with(context).load(imageUrl).into(ivPoster);
+
+
+            // 1. Register click listener on the whole orw
+            // 2. Navigate to a new activity on tap
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

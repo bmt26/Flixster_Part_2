@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flixster</string>
+    <string name="ivPoster_ContentDescription">Movie Poster</string>
 </resources>

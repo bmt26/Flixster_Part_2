@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flixster">
         <activity
+            android:name=".DetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
