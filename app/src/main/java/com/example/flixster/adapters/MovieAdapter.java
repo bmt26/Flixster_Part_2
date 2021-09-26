@@ -1,6 +1,7 @@
 package com.example.flixster.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.flixster.DetailActivity;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -89,9 +93,9 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemViewType(int position) {
         //voteAverage
-        if (movies.get(position).getVoteAverage()<8) {
+        if (movies.get(position).getRating()<8) {
             return NOTPOP;
-        } else if (8<=movies.get(position).getVoteAverage()) {
+        } else if (8<=movies.get(position).getRating()) {
             return POP;
         }
         return -1;
@@ -127,12 +131,14 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             Glide.with(context).load(imageUrl).into(ivPoster);
 
-            // 1. Register click listener on the whole orw
-            // 2. Navigate to a new activity on tap
+            // 1. Register click listener on the whole row
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+                    // 2. Navigate to a new activity on tap
+                    Intent i = new Intent(context, DetailActivity.class);
+                    i.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(i);
                 }
             });
         }
@@ -155,13 +161,14 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             Glide.with(context).load(imageUrl).into(ivPoster);
 
-
-            // 1. Register click listener on the whole orw
-            // 2. Navigate to a new activity on tap
+            // 1. Register click listener on the whole row
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+                    // 2. Navigate to a new activity on tap
+                    Intent i = new Intent(context, DetailActivity.class);
+                    i.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(i);
                 }
             });
         }
